@@ -150,6 +150,9 @@ for s1 in range(bootstrap_size):
     for s2 in range(samples1.shape[0]):
         Rnd_indv=samples2[:,x2]
         Rnd2=np.average(Rnd_indv,axis=0)
+        #Rnd2=Rnd_indv.flatten()
+        #xtemp=np.random.choice(np.arange(0,len(Rnd2)),samp_size)
+        #Rnd2=Rnd2[xtemp]
         Rnd1=samples1[:,x1]
         #iterate over different trimming levels
         for k in range(len(alpha)):
