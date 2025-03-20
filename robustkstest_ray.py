@@ -15,7 +15,7 @@ from statsmodels.distributions.empirical_distribution import ECDF
 # In[2]:
 
 
-from utils import batch_clip_samples,create_ecdf,create_interpecdf
+from utils import batch_clip_samples,create_ecdf,create_interpecdf, choice
 
 
 # In[3]:
