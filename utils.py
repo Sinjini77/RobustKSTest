@@ -66,8 +66,10 @@ def batch_clip_samples(samples):
   samples_sorted=np.zeros_like(samples)
   for i in range(samples.shape[0]):
     samples_sorted[i]=np.sort(samples[i])
-  Rnd_min=samples_sorted[:,0].max()
-  Rnd_max=samples_sorted[:,-1].min()
+  # Rnd_min=samples_sorted[:,0].max()
+  # Rnd_max=samples_sorted[:,-1].min()
+  Rnd_min = -15
+  Rnd_max = 15
   clipped_samples=np.copy(samples_sorted)
   for i in range(samples_sorted.shape[0]):
     ind1=np.where(samples_sorted[i]<=Rnd_min)[0]
