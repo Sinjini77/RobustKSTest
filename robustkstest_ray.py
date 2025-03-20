@@ -137,6 +137,7 @@ samp_size=samples1.shape[1]
 Rnd1=np.zeros((samples2.shape[0],int(samp_size/2)))
 Rnd2=np.zeros((int(samp_size/2))) 
 
+
 #Iterate over bootstrap iters
 for s1 in range(bootstrap_size):
     trimmed_dist=[]
@@ -146,18 +147,41 @@ for s1 in range(bootstrap_size):
     x1=x[:int(len(x)/2)]
     x2=x[int(len(x)/2):]
     t=time.time()
+    Rnd1=samples1[:,x1]
+    Rnd_indv=samples2[:,x2]
+    #val_range=np.average(Rnd_indv,axis=0)
+    val_range=Rnd_indv.flatten()
+    F_indv=np.zeros_like(Rnd_indv)
     #iterate over no. of models
     for s2 in range(samples1.shape[0]):
-        Rnd_indv=samples2[:,x2]
-        Rnd2=np.average(Rnd_indv,axis=0)
-        #Rnd2=Rnd_indv.flatten()
-        #xtemp=np.random.choice(np.arange(0,len(Rnd2)),samp_size)
-        #Rnd2=Rnd2[xtemp]
-        Rnd1=samples1[:,x1]
-        #iterate over different trimming levels
-        for k in range(len(alpha)):
-            s=[s2,k]
-            trimmed_dist.append(calc_trimdk.remote(s))
+        samp=np.sort(Rnd_indv[s2,:])
+        ecdf=ECDF(samp)
+        F_indv[s2,:]=np.array([ecdf(j) for j in samp])
+    F_average=np.average(F_indv,axis=0)
+    #Inverse transform sampling to generate samples for reference function $\hat{G}$
+    counts=collections.defaultdict(int)
+    for i in range(len(x)):
+        counts[choice(F_average,val_range)]+=1
+    val=[]
+    count=[]
+    for key in counts.keys():
+        val.append(key)
+        count.append(counts[key])
+    val.pop(0)
+    count.pop(0)
+    rand_samp=[]
+    for i in range(len(val)):
+        rand_samp.append(val[i]*np.ones(count[i]))
+    samp_rnd=[]
+    for lists in rand_samp:
+        for l in lists:
+            samp_rnd.append(l)
+    Rnd2=np.random.choice(samp_rnd,int(samp_size/2))
+    #iterate over different trimming levels
+    for s2 in range(samples1.shape[0]):
+      for k in range(len(alpha)):
+        s=[s2,k]
+        trimmed_dist.append(calc_trimdk.remote(s))
     all_trim=np.array(ray.get(trimmed_dist))
     i=0
     for s2 in range(samples1.shape[0]):
@@ -167,7 +191,6 @@ for s1 in range(bootstrap_size):
     ray.shutdown()
     elapsed=t-time.time()
     print("Time elapsed for alpha",elapsed)
-
 
 # In[23]:
 
