@@ -4,7 +4,7 @@ Two sample robust Kolmogorov-Smirnov test
 
 Python code for the hypothesis test of the paper:
 
-Banerjee, S., Cannon, R., Marrinan, T., Chiang, T., & Sarwate, A. D. (2023). Robust Nonparametric Hypothesis Testing to Understand Variability in Training Neural Networks. arXiv preprint arXiv:2310.00541.
+Banerjee, S., Cannon, R., Marrinan, T., Chiang, T., & Sarwate, A. D. (2023). Measuring model variability using robust non-parametric testing. arXiv preprint arXiv:2406.08307.
 
 ## Usage
 
@@ -15,10 +15,10 @@ Run the file: robustkstest_ray.py
 Cite as:
 
 @article{banerjee2023robust,
-  title={Robust Nonparametric Hypothesis Testing to Understand Variability in Training Neural Networks},
-  author={Banerjee, Sinjini and Cannon, Reilly and Marrinan, Tim and Chiang, Tony and Sarwate, Anand D},
-  journal={arXiv preprint arXiv:2310.00541},
-  year={2023}
+  title={Measuring model variability using robust non-parametric testing},
+  author={Banerjee, Sinjini and Marrinan, Tim and Cannon, Reilly and Chiang, Tony and Sarwate, Anand D},
+  journal={arXiv preprint arXiv:2406.08307},
+  year={2024}
 }
 
 
