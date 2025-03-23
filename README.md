@@ -4,7 +4,7 @@ Two sample robust Kolmogorov-Smirnov test
 
 Python code for the hypothesis test of the paper:
 
-Banerjee, S., Marrinan, T., Cannon, R., Chiang, T., & Sarwate, A. D. (2023). Measuring model variability using robust non-parametric testing. arXiv preprint arXiv:2406.08307.
+Banerjee, S., Marrinan, T., Cannon, R., Chiang, T., & Sarwate, A. D. (2024). Measuring model variability using robust non-parametric testing. arXiv preprint arXiv:2406.08307.
 
 ## Usage
 
